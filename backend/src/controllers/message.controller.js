@@ -10,6 +10,10 @@ export const getAllContacts = async (req, res) => {
       _id: { $ne: loggedInUserId },
     }).select("-password");
 
+    if (!filteredUsers || filteredUsers.length === 0) {
+      return res.status(200).json([]);
+    }
+
     res.status(200).json(filteredUsers);
   } catch (error) {
     console.log("Error in getAllContacts:", error);
@@ -103,6 +107,10 @@ export const getChatPartners = async (req, res) => {
     const chatPartners = await User.find({
       _id: { $in: chatPartnerIds },
     }).select("-password");
+
+    if (!chatPartners || chatPartners.length === 0) {
+      return res.status(200).json([]);
+    }
 
     res.status(200).json(chatPartners);
   } catch (error) {

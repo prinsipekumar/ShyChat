@@ -27,9 +27,17 @@ export const useChatStore = create((set, get) => ({
     set({ isUsersLoading: true });
     try {
       const res = await axiosInstance.get("/messages/contacts");
-      set({ allContacts: res.data });
+      if (res.data.length === 0) {
+        toast("No contacts available yet");
+      } else {
+        set({ allContacts: res.data });
+      }
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response?.status === 401) {
+        toast.error("Authentication failed. Please log in again.");
+      } else {
+        toast.error(error.response?.data?.message || "Something went wrong");
+      }
     } finally {
       set({ isUsersLoading: false });
     }
