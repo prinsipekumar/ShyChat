@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+@theme {
+  --animate-border: border 4s linear infinite;
+
+  @keyframes border {
+    to {
+      --border-angle: 360deg;
+    }
+  }
+}
+
+.input {
+  @apply w-full bg-gray-800/50 border border-gray-700 rounded-lg py-2 pl-10 pr-4 
+  text-gray-200 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent
+  text-sm sm:text-base;
+}
+
+.auth-input-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 text-gray-400
+  w-4 h-4 sm:w-5 sm:h-5;
+}
+
+.auth-input-lable {
+  @apply block text-xs sm:text-sm font-medium text-gray-300 mb-2;
+}
+
+.auth-badge {
+  @apply inline-flex items-center px-3 py-1 text-[10px] sm:text-xs md:text-sm font-medium rounded-full bg-blue-500/20 text-blue-300;
+}
+
+.auth-btn {
+  @apply w-full bg-blue-500 text-white rounded-lg py-2.5 font-medium
+  hover:bg-blue-600 focus:ring-2 focus:ring-blue-500
+  text-sm sm:text-base;
+}
+
+.auth-link {
+  @apply px-4 py-2 inline-block bg-blue-500/10 rounded-lg text-blue-400
+  hover:text-blue-500 text-xs sm:text-sm transition-colors;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+.send-btn:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
